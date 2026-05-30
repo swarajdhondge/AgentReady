@@ -7,7 +7,7 @@
 
 INPUT=$(cat)
 if ! command -v jq &>/dev/null; then
-  # Without jq we cannot reliably parse the hook payload — allow the stop
+  echo "WARNING: jq not installed — stop verification guard is disabled. Install jq to enable protection." >&2
   exit 0
 fi
 STOP_REASON=$(echo "$INPUT" | jq -r '.stop_reason // empty')

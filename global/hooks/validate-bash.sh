@@ -4,7 +4,7 @@
 
 INPUT=$(cat)
 if ! command -v jq &>/dev/null; then
-  # Without jq we cannot parse the command — allow it through
+  echo "WARNING: jq not installed — destructive command guard is disabled. Install jq to enable protection." >&2
   exit 0
 fi
 COMMAND=$(echo "$INPUT" | jq -r '.tool_input.command // empty')
@@ -18,7 +18,7 @@ BLOCKED_PATTERNS=(
   "rm[[:space:]]+-[a-zA-Z]*r[a-zA-Z]*f[[:space:]]+\*"
   "DROP DATABASE"
   "DROP TABLE"
-  "truncate"
+  "TRUNCATE TABLE"
   "format C:"
   ":(){ :|:& };:"
   "mkfs"

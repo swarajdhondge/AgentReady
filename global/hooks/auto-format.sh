@@ -4,7 +4,7 @@
 
 INPUT=$(cat)
 if ! command -v jq &>/dev/null; then
-  # Without jq we cannot parse the file path — skip formatting
+  echo "WARNING: jq not installed — auto-formatting is disabled. Install jq to enable." >&2
   exit 0
 fi
 FILE_PATH=$(echo "$INPUT" | jq -r '.tool_input.file_path // .tool_result.filePath // empty')
