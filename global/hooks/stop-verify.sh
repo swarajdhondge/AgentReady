@@ -6,14 +6,12 @@
 # Claude ran it in this session. If tests exist but weren't run, it blocks.
 
 INPUT=$(cat)
-if command -v jq &>/dev/null; then
-  STOP_REASON=$(echo "$INPUT" | jq -r '.stop_reason // empty')
-  TRANSCRIPT=$(echo "$INPUT" | jq -r '.transcript // empty')
-else
-  # Fallback: extract fields with grep/sed when jq is not installed
-  STOP_REASON=$(echo "$INPUT" | grep -o '"stop_reason":"[^"]*"' | head -1 | sed 's/"stop_reason":"//;s/"$//')
-  TRANSCRIPT="$INPUT"
+if ! command -v jq &>/dev/null; then
+  # Without jq we cannot reliably parse the hook payload — allow the stop
+  exit 0
 fi
+STOP_REASON=$(echo "$INPUT" | jq -r '.stop_reason // empty')
+TRANSCRIPT=$(echo "$INPUT" | jq -r '.transcript // empty')
 
 # Only gate on natural stops, not user interrupts
 if [ "$STOP_REASON" = "user" ]; then
