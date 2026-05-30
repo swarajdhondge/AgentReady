@@ -211,9 +211,9 @@ For Claude Code: copy to `.claude/agents/`. For other agents: note them in the i
 
 ---
 
-## Step 10: Copy /go Command (for portability)
+## Step 10: Copy /ready Command (for portability)
 
-For Claude Code: copy `commands/go.md` to `.claude/commands/go.md` if not already present.
+For Claude Code: copy `commands/ready.md` to `.claude/commands/ready.md` if not already present.
 For other agents: the workflow section in the instruction file (Step 5) already covers the same behavior, so this step is optional.
 
 ---

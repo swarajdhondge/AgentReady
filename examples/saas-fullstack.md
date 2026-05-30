@@ -5,7 +5,7 @@
 ### Step 1: Read existing state
 - CLAUDE.md exists (180 lines) -- has architecture, conventions, phase tracking
 - .claude/settings.json exists -- has some permissions
-- No .mcp.json, no agents, no /go command
+- No .mcp.json, no agents, no /ready command
 
 ### Step 2: Detect
 Python (FastAPI, SQLAlchemy, Pydantic, Alembic, Redis), TypeScript (Next.js, React, Tailwind, Zustand), Docker (compose with postgres + redis services), GitHub Actions (test + deploy workflows)
@@ -15,7 +15,7 @@ python.md, typescript.md, react-nextjs.md, docker.md, cicd.md, workflow.md, cont
 
 ### Step 4: Diff
 - CLAUDE.md is 180 lines -- needs restructuring (over 100 line limit)
-- Missing: code-reviewer agent, security-reviewer agent, /go command
+- Missing: code-reviewer agent, security-reviewer agent, /ready command
 - Missing: webapp-testing skill (install individually with `--skill` flag)
 - Existing permissions cover most things, missing alembic + docker compose
 - Architecture section (60 lines) should move to docs/architecture.md
@@ -37,7 +37,7 @@ Suggested skills: grill-me, grill-with-docs, webapp-testing, frontend-design
 User approved: webapp-testing, frontend-design (installed via `--skill` flag)
 User deferred: grill-me, grill-with-docs (can install later)
 Copied: code-reviewer.md, security-reviewer.md, test-writer.md
-Copied: /go command
+Copied: /ready command
 
 ### Report
 ```
@@ -47,7 +47,7 @@ Copied: /go command
 ### Rules loaded: python, typescript, react-nextjs, docker, cicd, workflow, context
 
 ### Created: docs/architecture.md, docs/deployment.md, .claude/agents/code-reviewer.md,
-  .claude/agents/security-reviewer.md, .claude/agents/test-writer.md, .claude/commands/go.md
+  .claude/agents/security-reviewer.md, .claude/agents/test-writer.md, .claude/commands/ready.md
 
 ### Restructured: CLAUDE.md 180 lines → 80 lines + 2 @imported files (zero info loss)
 

@@ -12,11 +12,11 @@ When asked to "use AgentReady", "set up this project", "align with AgentReady", 
 - `rules/` -- Per-tech rules (composable) + workflow + context management rules.
 - `global/agents/` -- Agent definitions to copy into projects.
 - `global/hooks/` -- Hook scripts (wired in global settings.json for Claude Code).
-- `commands/go.md` -- /go slash command to copy into projects.
+- `commands/ready.md` -- /ready slash command to copy into projects.
 
 ## Already Global (Claude Code, always active)
 
 - MCP: github, context7, Playwright, sequential-thinking
 - Hooks: validate-bash (PreToolUse), auto-format (PostToolUse), stop-verify (Stop), post-compact (PostCompact)
 - Agents: code-reviewer, security-reviewer, test-writer, docs-maintainer
-- Command: /go
+- Command: /ready
