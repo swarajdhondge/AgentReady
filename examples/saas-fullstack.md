@@ -33,9 +33,7 @@ No .mcp.json needed (global servers cover it)
 Merged alembic + docker compose permissions into existing settings.json
 
 ### Step 8-10: Skills, agents, commands
-Suggested skills: grill-me, grill-with-docs, webapp-testing, frontend-design
-User approved: webapp-testing, frontend-design (installed via `--skill` flag)
-User deferred: grill-me, grill-with-docs (can install later)
+Installed skills: grill-me, grill-with-docs, webapp-testing, frontend-design (all via `--skill` flag)
 Copied: code-reviewer.md, security-reviewer.md, test-writer.md
 Copied: /ready command
 
@@ -53,10 +51,9 @@ Copied: /ready command
 
 ### Updated: .claude/settings.json (added alembic + docker compose permissions)
 
-### Skills installed: webapp-testing, frontend-design (user-approved, via --skill flag)
-### Skills suggested: grill-me, grill-with-docs (user can install later)
+### Skills installed: grill-me, grill-with-docs, webapp-testing, frontend-design
 
 ### Already in place: CLAUDE.md conventions, tech stack docs, test commands, git workflow
 
-### Suggestions: Consider Sentry MCP if using error monitoring in production
+### Needs user action: Sentry MCP (`claude mcp add --transport http sentry https://mcp.sentry.dev/mcp`)
 ```

@@ -174,13 +174,13 @@ Allow: Read, Grep, Glob, Bash(git status), Bash(git diff:*), Bash(git log:*)
 
 ---
 
-## Step 8: Suggest & Install Skills
+## Step 8: Install Skills
 
-Skills are reusable prompt-driven workflows that extend what the agent can do. Currently installable in Claude Code via `npx skills add`. For other agents, note relevant skills in the instruction file so the user can adopt them manually.
+Skills are reusable prompt-driven workflows that extend what the agent can do. Currently installable in Claude Code via `npx skills add`. For other agents, note relevant skills in the instruction file.
 
 **Discover first**: Check what's already installed (`.agents/skills/`, `.claude/commands/`). Never re-install an existing skill.
 
-**Suggest, don't force**: Present relevant skills to the user. Install only what they approve. Ask whether they want skills to auto-trigger when relevant or stay manual (slash command only).
+**Default: just install matching skills.** Only ask the user first if they've explicitly requested manual control or the agent is running in a restricted/confirmation mode.
 
 | Condition | Skill | Repo | What it does |
 |-----------|-------|------|-------------|
@@ -218,9 +218,9 @@ For other agents: the workflow section in the instruction file (Step 5) already 
 
 ---
 
-## Step 11: Suggest Additional MCP Servers
+## Step 11: Additional MCP Servers
 
-SUGGEST only. Tell the user what would help and how to install:
+Install these if the condition matches and they're not already configured. If the agent lacks permission to install MCP servers, tell the user the command to run.
 
 | Detected | Suggest | Install command |
 |----------|---------|-----------------|
@@ -251,7 +251,7 @@ SUGGEST only. Tell the user what would help and how to install:
 - [instruction file: X lines → Y lines + imported files]
 
 ### Skills installed:
-- [list, or "N/A -- not Claude Code"]
+- [list, or "N/A"]
 
 ### Agents copied:
 - [list, or "N/A"]
@@ -259,8 +259,8 @@ SUGGEST only. Tell the user what would help and how to install:
 ### Already in place:
 - [things that needed no changes]
 
-### Suggestions:
-- [MCP servers with install commands]
+### Needs user action (only if agent lacked permission):
+- [MCP servers or tools that require user to run a command]
 ```
 
 ---
