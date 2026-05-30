@@ -6,8 +6,14 @@
 # Claude ran it in this session. If tests exist but weren't run, it blocks.
 
 INPUT=$(cat)
-STOP_REASON=$(echo "$INPUT" | jq -r '.stop_reason // empty')
-TRANSCRIPT=$(echo "$INPUT" | jq -r '.transcript // empty')
+if command -v jq &>/dev/null; then
+  STOP_REASON=$(echo "$INPUT" | jq -r '.stop_reason // empty')
+  TRANSCRIPT=$(echo "$INPUT" | jq -r '.transcript // empty')
+else
+  # Fallback: extract fields with grep/sed when jq is not installed
+  STOP_REASON=$(echo "$INPUT" | grep -o '"stop_reason":"[^"]*"' | head -1 | sed 's/"stop_reason":"//;s/"$//')
+  TRANSCRIPT="$INPUT"
+fi
 
 # Only gate on natural stops, not user interrupts
 if [ "$STOP_REASON" = "user" ]; then
@@ -17,7 +23,7 @@ fi
 # Check if project has test commands
 HAS_TESTS=false
 if [ -f "package.json" ]; then
-  if jq -e '.scripts.test' package.json &>/dev/null; then
+  if (command -v jq &>/dev/null && jq -e '.scripts.test' package.json &>/dev/null) || grep -q '"test"' package.json 2>/dev/null; then
     HAS_TESTS=true
     TEST_CMD="npm test"
   fi

@@ -155,13 +155,15 @@ Allow: Read, Grep, Glob, Bash(git status), Bash(git diff:*), Bash(git log:*)
 
 Skip for non-Claude Code agents. Check what's already installed first.
 
+**WARNING**: `npx skills add <repo>` installs ALL skills from a repo -- often hundreds of files, most irrelevant. Always use the `--skill <name>` flag to pick only what the project needs. Never install an entire skill repo.
+
 | Condition | Install |
 |-----------|---------|
-| Every project | `npx skills add obra/superpowers` |
-| Has Dockerfile OR docker-compose OR cloud infra OR auth/payments logic | `npx skills add trailofbits/skills` |
 | Has react or next in package.json deps | `npx skills add https://github.com/anthropics/skills --skill webapp-testing` |
 | Has react or next in package.json deps | `npx skills add https://github.com/anthropics/skills --skill frontend-design` |
 | Has next in package.json deps | `npx skills add https://github.com/vercel-labs/agent-skills --skill vercel-react-best-practices` |
+
+Do NOT blanket-install `obra/superpowers` or `trailofbits/skills` -- they dump 500+ files into `.agents/skills/` (blockchain scanners, fuzzing tools, tarot cards) regardless of your project's stack. If you need a specific skill from these repos, install it individually with `--skill <name>`.
 
 ---
 
