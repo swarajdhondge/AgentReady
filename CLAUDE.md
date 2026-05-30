@@ -17,6 +17,6 @@ When asked to "use AgentReady", "set up this project", "align with AgentReady", 
 ## Already Global (Claude Code, always active)
 
 - MCP: github, context7, Playwright, sequential-thinking
-- Hooks: validate-bash (PreToolUse), auto-format (PostToolUse), notify (Notification), stop-verify (Stop), post-compact (PostCompact)
+- Hooks: validate-bash (PreToolUse), auto-format (PostToolUse), stop-verify (Stop), post-compact (PostCompact)
 - Agents: code-reviewer, security-reviewer, test-writer, docs-maintainer
 - Command: /go
