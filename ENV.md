@@ -22,12 +22,11 @@ docs/**/*.md                        → architecture, deployment docs
 README.md                           → project description
 ```
 
-Also discover what's already available on the system (Claude Code only):
+Also discover what tools the agent already has access to:
 ```
-claude mcp list                → active MCP servers (global + project)
-.claude/commands/              → slash commands
-.agents/skills/                → installed skills
-.claude/agents/                → available agents
+Claude Code:   claude mcp list, .claude/commands/, .agents/skills/, .claude/agents/
+Cursor:        .cursor/rules/, .mcp.json, installed extensions
+Codex/Gemini:  check agent's available tools and connected services
 ```
 
 Use what's already there before adding anything. The user's existing setup is the starting point, not a blank slate.
@@ -134,35 +133,35 @@ Add this section to the instruction file so agents fire automatically every sess
 - Suggest relevant available tools/skills when they fit the current task
 ```
 
-This section makes agents automatic -- without it they sit unused. These lines are universal and apply to any tech stack. The last line ensures Claude actively uses whatever MCP servers, agents, and skills are available on the system rather than ignoring them.
+This section makes agents automatic -- without it they sit unused. These lines are universal: they work in CLAUDE.md, AGENTS.md, or any instruction file, with any agent. The last line ensures the agent actively uses whatever tools, servers, and skills are available on the system rather than ignoring them.
 
 workflow.md and context.md contain deeper patterns for you to internalize (subagent routing, context thresholds, parallel agents). Do NOT dump their full content into the instruction file -- only the lean workflow section above goes in.
 
 ---
 
-## Step 6: Configure MCP (Claude Code only)
+## Step 6: Configure MCP
 
-Skip this step if the agent is not Claude Code.
+Skip if the agent doesn't support MCP. Currently supported: Claude Code, Cursor.
 
-Check what MCP servers the user already has (globally and per-project). Only add what's missing AND needed.
+Check what MCP servers are already active (globally and per-project). Only add what's missing AND needed.
 
-**Typically global** (do NOT duplicate if already installed): github, context7, Playwright, sequential-thinking. Run `claude mcp list` to verify what's already active before adding anything.
+**Typically global** (do NOT duplicate if already installed): github, context7, Playwright, sequential-thinking. For Claude Code: run `claude mcp list` to verify.
 
-If the project needs a server that isn't already installed (globally or per-project), add it to `.mcp.json`:
+If the project needs a server that isn't already installed, add it to `.mcp.json`:
 
 | Project needs | Add to .mcp.json |
 |---------------|------------------|
 | Database querying during dev | `postgres`: `npx -y @bytebase/dbhub --dsn "postgresql://..."` |
 
-Do NOT add context7, Playwright, github, or sequential-thinking to `.mcp.json` if they're already in the user's global config. Adding them per-project creates duplicates and wastes tool budget.
+Do NOT duplicate servers that are already in the user's global config. Adding them per-project wastes tool budget.
 
 If all needed servers are already installed, do NOT create .mcp.json.
 
 ---
 
-## Step 7: Update Permissions (Claude Code only)
+## Step 7: Update Permissions
 
-Skip for non-Claude Code agents.
+Skip if the agent doesn't use a permissions file. Claude Code uses `.claude/settings.json`.
 
 Update `.claude/settings.json` with permissions from matched rules.
 
@@ -175,33 +174,33 @@ Allow: Read, Grep, Glob, Bash(git status), Bash(git diff:*), Bash(git log:*)
 
 ---
 
-## Step 8: Suggest & Install Skills (Claude Code only)
+## Step 8: Suggest & Install Skills
 
-Skip for non-Claude Code agents.
+Skills are reusable prompt-driven workflows that extend what the agent can do. Currently installable in Claude Code via `npx skills add`. For other agents, note relevant skills in the instruction file so the user can adopt them manually.
 
-**Discover first**: List `.agents/skills/` and `.claude/commands/` to see what's already installed. Never re-install an existing skill.
+**Discover first**: Check what's already installed (`.agents/skills/`, `.claude/commands/`). Never re-install an existing skill.
 
-**Suggest, don't force**: Present relevant skills to the user based on their project. Install only what they approve. Ask the user whether they want skills to auto-trigger when relevant or stay manual (slash command only).
+**Suggest, don't force**: Present relevant skills to the user. Install only what they approve. Ask whether they want skills to auto-trigger when relevant or stay manual (slash command only).
 
-| Condition | Skill | Source | What it does |
-|-----------|-------|--------|-------------|
-| Any project | `grill-me` | `anthropics/skills` | Quizzes you on your codebase to find knowledge gaps |
-| Has docs/ or README.md | `grill-with-docs` | `anthropics/skills` | Reviews code against project documentation |
-| Has react/next in deps | `webapp-testing` | `anthropics/skills` | Browser-based testing workflows |
-| Has react/next in deps | `frontend-design` | `anthropics/skills` | UI/UX design assistance |
-| Has next in deps | `vercel-react-best-practices` | `vercel-labs/agent-skills` | Next.js patterns and optimization |
+| Condition | Skill | Repo | What it does |
+|-----------|-------|------|-------------|
+| Any project | `grill-me` | [anthropics/skills](https://github.com/anthropics/skills) | Quizzes you on your codebase to find knowledge gaps |
+| Has docs/ or README.md | `grill-with-docs` | [anthropics/skills](https://github.com/anthropics/skills) | Reviews code against project documentation |
+| Has react/next in deps | `webapp-testing` | [anthropics/skills](https://github.com/anthropics/skills) | Browser-based testing workflows |
+| Has react/next in deps | `frontend-design` | [anthropics/skills](https://github.com/anthropics/skills) | UI/UX design assistance |
+| Has next in deps | `vercel-react-best-practices` | [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) | Next.js patterns and optimization |
 
-Install command: `npx skills add <repo-url> --skill <name>`
+**Claude Code install**: `npx skills add https://github.com/<org>/<repo> --skill <name>`
 
-**WARNING**: Never install an entire skill repo (`npx skills add <repo>` without `--skill`). Repos like `obra/superpowers` or `trailofbits/skills` dump 500+ irrelevant files. Always use `--skill <name>`.
+**WARNING**: Never install an entire skill repo without `--skill`. Repos like `obra/superpowers` or `trailofbits/skills` dump 500+ irrelevant files. Always pick individually.
 
 ---
 
-## Step 9: Copy Agents (Claude Code only -- for portability)
+## Step 9: Copy Agents (for portability)
 
-These agents may already be installed globally. Copy them per-project only so other developers cloning this repo get them too.
+These agent definitions ensure any developer cloning the repo gets reviewers and test writers out of the box.
 
-Check `.claude/agents/` -- never overwrite existing files (they may be customized).
+For Claude Code: copy to `.claude/agents/`. For other agents: note them in the instruction file so the agent knows these roles exist. Never overwrite existing files (they may be customized).
 
 | Condition | Copy from AgentReady `global/agents/` |
 |-----------|--------------------------------------|
@@ -212,9 +211,10 @@ Check `.claude/agents/` -- never overwrite existing files (they may be customize
 
 ---
 
-## Step 10: Copy /go Command (Claude Code only -- for portability)
+## Step 10: Copy /go Command (for portability)
 
-Copy `commands/go.md` to `.claude/commands/go.md` if not already present. Same logic as Step 9 -- ensures portability.
+For Claude Code: copy `commands/go.md` to `.claude/commands/go.md` if not already present.
+For other agents: the workflow section in the instruction file (Step 5) already covers the same behavior, so this step is optional.
 
 ---
 
