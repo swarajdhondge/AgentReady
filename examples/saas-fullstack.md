@@ -33,8 +33,9 @@ No .mcp.json needed (global servers cover it)
 Merged alembic + docker compose permissions into existing settings.json
 
 ### Step 8-10: Skills, agents, commands
-Installed: webapp-testing (via `--skill webapp-testing`), frontend-design (via `--skill frontend-design`)
-Skipped: superpowers, trailofbits/skills (blanket install dumps 500+ irrelevant files)
+Suggested skills: grill-me, grill-with-docs, webapp-testing, frontend-design
+User approved: webapp-testing, frontend-design (installed via `--skill` flag)
+User deferred: grill-me, grill-with-docs (can install later)
 Copied: code-reviewer.md, security-reviewer.md, test-writer.md
 Copied: /go command
 
@@ -52,7 +53,8 @@ Copied: /go command
 
 ### Updated: .claude/settings.json (added alembic + docker compose permissions)
 
-### Skills installed: webapp-testing, frontend-design (individually via --skill flag)
+### Skills installed: webapp-testing, frontend-design (user-approved, via --skill flag)
+### Skills suggested: grill-me, grill-with-docs (user can install later)
 
 ### Already in place: CLAUDE.md conventions, tech stack docs, test commands, git workflow
 

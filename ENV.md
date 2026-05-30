@@ -22,6 +22,16 @@ docs/**/*.md                        → architecture, deployment docs
 README.md                           → project description
 ```
 
+Also discover what's already available on the system (Claude Code only):
+```
+claude mcp list                → active MCP servers (global + project)
+.claude/commands/              → slash commands
+.agents/skills/                → installed skills
+.claude/agents/                → available agents
+```
+
+Use what's already there before adding anything. The user's existing setup is the starting point, not a blank slate.
+
 **CRITICAL**: Existing project knowledge (architecture decisions, conventions, deployment quirks) overrides AgentReady rules. Rules are defaults. Project context is truth.
 
 ---
@@ -121,9 +131,10 @@ Add this section to the instruction file so agents fire automatically every sess
 - After changes: spawn code-reviewer agent on the diff
 - After new code: spawn test-writer if test framework exists
 - Verify: run the project's test/build/lint commands before declaring done
+- Suggest relevant available tools/skills when they fit the current task
 ```
 
-This section makes agents automatic -- without it they sit unused. These four lines are universal and apply to any tech stack.
+This section makes agents automatic -- without it they sit unused. These lines are universal and apply to any tech stack. The last line ensures Claude actively uses whatever MCP servers, agents, and skills are available on the system rather than ignoring them.
 
 workflow.md and context.md contain deeper patterns for you to internalize (subagent routing, context thresholds, parallel agents). Do NOT dump their full content into the instruction file -- only the lean workflow section above goes in.
 
@@ -164,21 +175,25 @@ Allow: Read, Grep, Glob, Bash(git status), Bash(git diff:*), Bash(git log:*)
 
 ---
 
-## Step 8: Install Skills (Claude Code only)
+## Step 8: Suggest & Install Skills (Claude Code only)
 
 Skip for non-Claude Code agents.
 
-**Idempotency check**: List `.agents/skills/` first. If a skill directory already exists, skip it. Never re-install an existing skill.
+**Discover first**: List `.agents/skills/` and `.claude/commands/` to see what's already installed. Never re-install an existing skill.
 
-**WARNING**: `npx skills add <repo>` installs ALL skills from a repo -- often hundreds of files, most irrelevant. Always use the `--skill <name>` flag to pick only what the project needs. Never install an entire skill repo.
+**Suggest, don't force**: Present relevant skills to the user based on their project. Install only what they approve. Ask the user whether they want skills to auto-trigger when relevant or stay manual (slash command only).
 
-| Condition | Install |
-|-----------|---------|
-| Has react or next in package.json deps | `npx skills add https://github.com/anthropics/skills --skill webapp-testing` |
-| Has react or next in package.json deps | `npx skills add https://github.com/anthropics/skills --skill frontend-design` |
-| Has next in package.json deps | `npx skills add https://github.com/vercel-labs/agent-skills --skill vercel-react-best-practices` |
+| Condition | Skill | Source | What it does |
+|-----------|-------|--------|-------------|
+| Any project | `grill-me` | `anthropics/skills` | Quizzes you on your codebase to find knowledge gaps |
+| Has docs/ or README.md | `grill-with-docs` | `anthropics/skills` | Reviews code against project documentation |
+| Has react/next in deps | `webapp-testing` | `anthropics/skills` | Browser-based testing workflows |
+| Has react/next in deps | `frontend-design` | `anthropics/skills` | UI/UX design assistance |
+| Has next in deps | `vercel-react-best-practices` | `vercel-labs/agent-skills` | Next.js patterns and optimization |
 
-Do NOT blanket-install `obra/superpowers` or `trailofbits/skills` -- they dump 500+ files into `.agents/skills/` (blockchain scanners, fuzzing tools, tarot cards) regardless of your project's stack. If you need a specific skill from these repos, install it individually with `--skill <name>`.
+Install command: `npx skills add <repo-url> --skill <name>`
+
+**WARNING**: Never install an entire skill repo (`npx skills add <repo>` without `--skill`). Repos like `obra/superpowers` or `trailofbits/skills` dump 500+ irrelevant files. Always use `--skill <name>`.
 
 ---
 
