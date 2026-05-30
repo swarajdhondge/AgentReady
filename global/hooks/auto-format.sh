@@ -3,6 +3,10 @@
 # Only runs formatters that exist in the project
 
 INPUT=$(cat)
+if ! command -v jq &>/dev/null; then
+  # Without jq we cannot parse the file path — skip formatting
+  exit 0
+fi
 FILE_PATH=$(echo "$INPUT" | jq -r '.tool_input.file_path // .tool_result.filePath // empty')
 
 if [ -z "$FILE_PATH" ] || [ ! -f "$FILE_PATH" ]; then

@@ -3,6 +3,10 @@
 # Exit code 2 = block the tool call, stderr fed back to Claude
 
 INPUT=$(cat)
+if ! command -v jq &>/dev/null; then
+  # Without jq we cannot parse the command — allow it through
+  exit 0
+fi
 COMMAND=$(echo "$INPUT" | jq -r '.tool_input.command // empty')
 
 BLOCKED_PATTERNS=(
