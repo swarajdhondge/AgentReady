@@ -26,7 +26,7 @@ python.md, typescript.md, react-nextjs.md, docker.md, cicd.md, workflow.md, cont
 Created `docs/architecture.md` (60 lines moved from CLAUDE.md)
 Created `docs/deployment.md` (40 lines moved from CLAUDE.md)
 CLAUDE.md rewritten as 80-line core with @imports. All 180 original lines preserved across 3 files.
-Added Workflow section (agents fire automatically -- code-reviewer after changes, test-writer for new code, context7 for docs, Playwright for UI).
+Added Workflow section (agents fire automatically -- code-reviewer after changes, test-writer for new code, verify before done).
 
 ### Step 6-7: .mcp.json + settings.json
 No .mcp.json needed (global servers cover it)

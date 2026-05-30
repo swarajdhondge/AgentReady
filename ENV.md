@@ -120,10 +120,10 @@ Add this section to the instruction file so agents fire automatically every sess
 - Plan before multi-file changes, execute after alignment
 - After changes: spawn code-reviewer agent on the diff
 - After new code: spawn test-writer if test framework exists
-- context7 for library docs, Playwright for UI verification
+- Verify: run the project's test/build/lint commands before declaring done
 ```
 
-Adapt to the project (e.g. drop Playwright line if no frontend, drop test-writer line if no test framework). This section makes agents automatic -- without it they sit unused.
+This section makes agents automatic -- without it they sit unused. These four lines are universal and apply to any tech stack.
 
 workflow.md and context.md contain deeper patterns for you to internalize (subagent routing, context thresholds, parallel agents). Do NOT dump their full content into the instruction file -- only the lean workflow section above goes in.
 
