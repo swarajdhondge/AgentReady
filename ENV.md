@@ -112,7 +112,20 @@ For other agents: add "See also: docs/architecture.md" references.
 ### If under 100 lines or new:
 Add missing items from Step 4. Use ACTUAL commands from package.json/pyproject.toml/Makefile -- never template placeholders. Read the project's real directory structure for architecture section.
 
-workflow.md and context.md are agent behavior rules -- do NOT put them in the project instruction file. They're for you to internalize and follow, not to persist.
+### Workflow section (always include):
+Add this section to the instruction file so agents fire automatically every session:
+
+```
+## Workflow
+- Plan before multi-file changes, execute after alignment
+- After changes: spawn code-reviewer agent on the diff
+- After new code: spawn test-writer if test framework exists
+- context7 for library docs, Playwright for UI verification
+```
+
+Adapt to the project (e.g. drop Playwright line if no frontend, drop test-writer line if no test framework). This section makes agents automatic -- without it they sit unused.
+
+workflow.md and context.md contain deeper patterns for you to internalize (subagent routing, context thresholds, parallel agents). Do NOT dump their full content into the instruction file -- only the lean workflow section above goes in.
 
 ---
 
