@@ -122,17 +122,17 @@ Skip this step if the agent is not Claude Code.
 
 Check what MCP servers the user already has (globally and per-project). Only add what's missing AND needed.
 
-Common global servers (do NOT duplicate if already installed): github, context7, Playwright, sequential-thinking.
+**Typically global** (do NOT duplicate if already installed): github, context7, Playwright, sequential-thinking. Run `claude mcp list` to verify what's already active before adding anything.
 
-If the project needs a server that isn't global, add it to `.mcp.json`:
+If the project needs a server that isn't already installed (globally or per-project), add it to `.mcp.json`:
 
 | Project needs | Add to .mcp.json |
 |---------------|------------------|
-| Live library docs (any project with third-party deps) | `context7`: `npx -y @upstash/context7-mcp@latest` |
-| Browser testing (frontend projects) | `playwright`: `npx -y @playwright/mcp@latest --headless` |
 | Database querying during dev | `postgres`: `npx -y @bytebase/dbhub --dsn "postgresql://..."` |
 
-If all needed servers are already global, do NOT create .mcp.json.
+Do NOT add context7, Playwright, github, or sequential-thinking to `.mcp.json` if they're already in the user's global config. Adding them per-project creates duplicates and wastes tool budget.
+
+If all needed servers are already installed, do NOT create .mcp.json.
 
 ---
 
@@ -153,7 +153,9 @@ Allow: Read, Grep, Glob, Bash(git status), Bash(git diff:*), Bash(git log:*)
 
 ## Step 8: Install Skills (Claude Code only)
 
-Skip for non-Claude Code agents. Check what's already installed first.
+Skip for non-Claude Code agents.
+
+**Idempotency check**: List `.agents/skills/` first. If a skill directory already exists, skip it. Never re-install an existing skill.
 
 **WARNING**: `npx skills add <repo>` installs ALL skills from a repo -- often hundreds of files, most irrelevant. Always use the `--skill <name>` flag to pick only what the project needs. Never install an entire skill repo.
 
@@ -246,3 +248,4 @@ SUGGEST only. Tell the user what would help and how to install:
 7. **Manage context.** Compact at 40%, clear between tasks, subagents for exploration.
 8. **Agent-agnostic.** Right files for whichever agent is running.
 9. **Portable.** Per-project agents/commands ensure cloners get the setup too.
+10. **Idempotent.** Running AgentReady twice produces the same result as running it once. Every step must check existing state and skip what's already done. Never duplicate files, skills, permissions, MCP servers, or instruction content.

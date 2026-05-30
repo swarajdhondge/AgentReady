@@ -2,10 +2,14 @@
 # PostCompaction hook: re-injects critical context after auto-compaction
 # Outputs to stdout which gets added to the transcript after compaction
 
-# Re-read CLAUDE.md if it exists
+# Re-read agent instruction file if it exists
 if [ -f "CLAUDE.md" ]; then
   echo "## Re-injected after compaction: CLAUDE.md"
   cat CLAUDE.md
+  echo ""
+elif [ -f "AGENTS.md" ]; then
+  echo "## Re-injected after compaction: AGENTS.md"
+  cat AGENTS.md
   echo ""
 fi
 

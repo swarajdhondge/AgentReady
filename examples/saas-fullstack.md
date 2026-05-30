@@ -16,7 +16,7 @@ python.md, typescript.md, react-nextjs.md, docker.md, cicd.md, workflow.md, cont
 ### Step 4: Diff
 - CLAUDE.md is 180 lines -- needs restructuring (over 100 line limit)
 - Missing: code-reviewer agent, security-reviewer agent, /go command
-- Missing: webapp-testing skill, trailofbits/skills
+- Missing: webapp-testing skill (install individually with `--skill` flag)
 - Existing permissions cover most things, missing alembic + docker compose
 - Architecture section (60 lines) should move to docs/architecture.md
 - Deployment section (40 lines) should move to docs/deployment.md
@@ -32,7 +32,8 @@ No .mcp.json needed (global servers cover it)
 Merged alembic + docker compose permissions into existing settings.json
 
 ### Step 8-10: Skills, agents, commands
-Installed: superpowers, trailofbits/skills, webapp-testing, frontend-design
+Installed: webapp-testing (via `--skill webapp-testing`), frontend-design (via `--skill frontend-design`)
+Skipped: superpowers, trailofbits/skills (blanket install dumps 500+ irrelevant files)
 Copied: code-reviewer.md, security-reviewer.md, test-writer.md
 Copied: /go command
 
@@ -50,7 +51,7 @@ Copied: /go command
 
 ### Updated: .claude/settings.json (added alembic + docker compose permissions)
 
-### Skills installed: superpowers, trailofbits/skills, webapp-testing, frontend-design
+### Skills installed: webapp-testing, frontend-design (individually via --skill flag)
 
 ### Already in place: CLAUDE.md conventions, tech stack docs, test commands, git workflow
 

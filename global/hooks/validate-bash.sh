@@ -10,9 +10,12 @@ fi
 COMMAND=$(echo "$INPUT" | jq -r '.tool_input.command // empty')
 
 BLOCKED_PATTERNS=(
-  "rm -rf /"
-  "rm -rf ~"
-  "rm -rf \*"
+  "rm[[:space:]]+-[a-zA-Z]*r[a-zA-Z]*f[[:space:]]+/"
+  "rm[[:space:]]+-[a-zA-Z]*f[a-zA-Z]*r[[:space:]]+/"
+  "rm[[:space:]]+-r[[:space:]]+-f[[:space:]]+/"
+  "rm[[:space:]]+-f[[:space:]]+-r[[:space:]]+/"
+  "rm[[:space:]]+-[a-zA-Z]*r[a-zA-Z]*f[[:space:]]+~"
+  "rm[[:space:]]+-[a-zA-Z]*r[a-zA-Z]*f[[:space:]]+\*"
   "DROP DATABASE"
   "DROP TABLE"
   "truncate"
@@ -24,11 +27,13 @@ BLOCKED_PATTERNS=(
   "chmod -R 777 /"
   "git push.*--force.*main"
   "git push.*--force.*master"
+  "git push.*main.*--force"
+  "git push.*master.*--force"
   "git reset --hard origin"
 )
 
 for pattern in "${BLOCKED_PATTERNS[@]}"; do
-  if echo "$COMMAND" | grep -qi "$pattern"; then
+  if echo "$COMMAND" | grep -Eqi "$pattern"; then
     echo "BLOCKED: Command matches destructive pattern '$pattern'. Refusing to execute." >&2
     exit 2
   fi
