@@ -2,11 +2,15 @@
 
 One prompt to understand a project, preserve its discoveries and decisions, and work toward a goal.
 
-> Use https://github.com/swarajdhondge/AgentReady to understand this project and help me deliver [goal].
+Paste this into your coding agent while your project is open:
 
-For setup only, say “Use AgentReady to set up this project.” Setup does not authorize implementing an app or running paid services.
+> Read https://raw.githubusercontent.com/swarajdhondge/AgentReady/main/START.md and set up AgentReady for this project.
 
-Your agent reads [SKILL.md](skills/agentready/SKILL.md), follows its relevant references, and works in your target project. If the agent cannot fetch the repository, provide a local checkout. No API key, server, or external dependency is required by AgentReady itself; the coding tool's normal usage terms still apply.
+For personal defaults across projects, replace “for this project” with “globally.” To work on a feature, add “Then help me deliver [goal].” The agent reads hosted Markdown files; you do not need to clone this repository or install a skill.
+
+The URL above becomes available when this change merges. To try this PR before merge, use the same URL with `main` replaced by `feat/one-prompt-project-continuity`.
+
+Setup creates or updates instructions only. It does not authorize building an app or running paid services. If the agent cannot fetch a required file, it should identify that file rather than claim setup worked.
 
 ## What happens
 
@@ -16,6 +20,12 @@ Your agent reads [SKILL.md](skills/agentready/SKILL.md), follows its relevant re
 - Work within your authorization, verify the outcome, and preserve discoveries for the next session.
 
 Existing knowledge stays in its existing locations. Use `AGENTS.md` as the entry point for project instructions and knowledge links. If no separate knowledge record exists, keep the initial record there too. Use the project’s existing structure.
+
+## AGENTS.md format
+
+Project instructions use five sections: **Project, Knowledge, Working rules, Checks, Constraints**. Keep only the sections the project needs, use real source links and commands, and preserve existing content. Global instructions contain shared working preferences; each project keeps its own knowledge.
+
+See the [project template](skills/agentready/assets/project-AGENTS.md) and [global template](skills/agentready/assets/global-AGENTS.md). Templates are filled by the agent, not copied with placeholders.
 
 ## Install as a skill (optional)
 
@@ -29,6 +39,7 @@ Personal model preferences and spending policies stay in personal configuration.
 
 ## Repository map
 
+- [Hosted entry point](START.md): setup without a checkout.
 - [Single skill](skills/agentready/SKILL.md): current workflow and supporting references.
 - [ENV.md](ENV.md): compatibility entry point for existing one-prompt users.
 - [Validation](tests/README.md): offline scenarios, measured outcomes, and limitations.
