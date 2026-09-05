@@ -10,7 +10,7 @@ Existing documentation locations and declared authority take priority over a new
 
 ## Minimal durable record
 
-Reuse the project's index, decision log, and progress record. If no suitable record exists and documentation edits are in scope, start one concise `agent.md` in the target repository. The filename is a fallback, not a required architecture. Add navigation from the existing instruction file only when setup/editing is authorized. A read-only request gets findings in the response.
+Reuse the project's index, decision log, and progress record. Use `AGENTS.md` as the entry point for instructions and links to that knowledge. If no separate knowledge record exists and documentation edits are in scope, keep the initial concise record in `AGENTS.md` too. Preserve existing content and update relevant sections without duplication; create the file only if absent. Do not create a separate `agent.md` or `AGENTREADY.md`. Keep detailed discovery and decisions in their existing documents and link them from `AGENTS.md`. A read-only request gets findings in the response.
 
 Keep these concerns discoverable, together or in existing files:
 - Knowledge map: authoritative source links, what they cover, and unread/unavailable areas.
