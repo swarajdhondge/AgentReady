@@ -15,7 +15,7 @@ Your agent reads [SKILL.md](skills/agentready/SKILL.md), follows its relevant re
 - Ask about missing decisions; distinguish your decisions from agent assumptions.
 - Work within your authorization, verify the outcome, and preserve discoveries for the next session.
 
-Existing knowledge stays in its existing locations. If no suitable record exists, the agent can create one small `AGENTREADY.md`. Use the project’s existing structure.
+Existing knowledge stays in its existing locations. If no suitable record exists, the agent can create one small `agent.md`. Use the project’s existing structure.
 
 ## Install as a skill (optional)
 
