@@ -1,5 +1,7 @@
 # AgentReady
 
+The user can ask: “Read swarajdhondge/AgentReady on GitHub and set it up for this project.” Resolve the repository name to GitHub and read this workflow from the requested branch, or the default branch when none is specified. If the setup scope is unclear, use the current project; global changes require an explicit global request.
+
 Read [the AgentReady skill](skills/agentready/SKILL.md), then follow the references needed for the user's request. Work in the user's project, not this source repository.
 
 ## Reading hosted files

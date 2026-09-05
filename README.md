@@ -4,11 +4,13 @@ One prompt to understand a project, preserve its discoveries and decisions, and 
 
 Paste this into your coding agent while your project is open:
 
-> Read https://raw.githubusercontent.com/swarajdhondge/AgentReady/main/START.md and set up AgentReady for this project.
+> Read swarajdhondge/AgentReady on GitHub and set it up for this project.
 
-For personal defaults across projects, replace “for this project” with “globally.” To work on a feature, add “Then help me deliver [goal].” The agent reads hosted Markdown files; you do not need to clone this repository or install a skill.
+For personal defaults across projects, say “Read swarajdhondge/AgentReady on GitHub and set it up globally.” To work on a feature, add “Then help me deliver [goal].” No clone or skill installation is needed.
 
-The URL above becomes available when this change merges. To try this PR before merge, use the same URL with `main` replaced by `feat/one-prompt-project-continuity`.
+**For the coding agent:** Read [START.md](START.md), then fetch the linked skill and relevant references from the same revision. A repository-name prompt identifies this GitHub repository; it does not require downloading a checkout.
+
+This workflow is available on the default branch after this PR merges. To try it before merge, include “use branch feat/one-prompt-project-continuity” in your prompt.
 
 Setup creates or updates instructions only. It does not authorize building an app or running paid services. If the agent cannot fetch a required file, it should identify that file rather than claim setup worked.
 
