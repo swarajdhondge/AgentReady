@@ -43,11 +43,7 @@ Personal model preferences and spending policies stay in personal configuration.
 
 - [Hosted entry point](START.md): setup without a checkout.
 - [Single skill](skills/agentready/SKILL.md): current workflow and supporting references.
-- [ENV.md](ENV.md): compatibility entry point for existing one-prompt users.
 - [Validation](tests/README.md): offline scenarios, measured outcomes, and limitations.
-- `examples/`: short usage scenarios, separate from executed tests.
-- `rules/`: optional notes on what to inspect for each stack.
-- `global/`: legacy Claude agent and hook templates; not installed automatically.
 
 ## License
 

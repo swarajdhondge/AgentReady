@@ -29,7 +29,7 @@ Without native skills, read SKILL.md and resolve its relative references from th
 
 Existing instructions, knowledge, and configuration are the starting point. Identify conflicts rather than silently overriding them. Preview consequential migrations; never infer permission to weaken restrictions from a setup request. Do not restructure files to satisfy arbitrary line limits.
 
-The repository’s `rules/` are optional inspection notes. `global/agents/` and `global/hooks/` are legacy templates. None are auto-installed dependencies of this skill. Inspect any selected resource against current tool documentation and project needs before use. Personal model routing and spending preferences belong in personal configuration, not universal public defaults. On another machine, install the skill/personal configuration separately; project records travel with the repository, credentials do not.
+Personal model routing and spending preferences belong in personal configuration, not universal public defaults. On another machine, install the skill/personal configuration separately; project records travel with the repository, credentials do not.
 
 ## Standard AGENTS.md
 
