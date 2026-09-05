@@ -1,30 +1,38 @@
 # AgentReady
 
-Most AI coding agents work better when your project has the right instruction files, permissions, and conventions set up. Setting that up manually is tedious and easy to get wrong.
+One prompt to understand a project, preserve its discoveries and decisions, and work toward a goal.
 
-AgentReady does it for you. One prompt, and your agent scans your project, figures out what tech you're using, and writes the config it needs to work well — without touching anything you've already set up.
+> Use https://github.com/swarajdhondge/AgentReady to understand this project and help me deliver [goal].
 
-Works with Claude Code, Codex, Gemini CLI, Cursor, Copilot.
+For setup only, say “Use AgentReady to set up this project.” Setup does not authorize implementing an app or running paid services.
 
-## Usage
+Your agent reads [SKILL.md](skills/agentready/SKILL.md), follows its relevant references, and works in your target project. If the agent cannot fetch the repository, provide a local checkout. No API key, server, or external dependency is required by AgentReady itself; the coding tool's normal usage terms still apply.
 
-In your project, tell your AI agent:
+## What happens
 
-```
-Use https://github.com/SwarajDhondge/AgentReady to set up this project
-```
+- Discover existing code, research, experiments, decisions, plans, and progress.
+- Read the sources relevant to your goal, including the evidence behind the plan.
+- Ask about consequential gaps; distinguish your decisions from agent assumptions.
+- Work within your authorization, verify the outcome, and preserve discoveries for the next session.
 
-It reads [`ENV.md`](ENV.md), scans your project, and generates what's missing. Never overwrites existing config.
+Existing knowledge stays in its existing locations. If no suitable record exists, the agent can create one small `AGENTREADY.md`. There is no mandatory documentation tree, agent swarm, or fixed planning ceremony.
 
-## What's in the repo
+## Install as a skill (optional)
 
-- [`ENV.md`](ENV.md) — The playbook the agent executes
-- [`rules/`](rules/) — Composable per-tech rules (Python, TypeScript, React/Next.js, Docker, Terraform, .NET, ML/AI, CI/CD)
-- [`global/`](global/) — Agents, hooks, and commands copied into your project
+Copy the entire `skills/agentready/` directory into your coding tool's supported skill location. For a Codex project, use `.agents/skills/agentready/`. Then ask to use AgentReady; the host's skill picker/invocation syntax may vary. Installation is optional when the agent can read this repository directly.
 
-## How it works
+The shared workflow is Markdown. Native skills, subagents, goals, and permissions depend on the host. The [adapter reference](skills/agentready/references/adapters.md) documents Codex integration and fallbacks; native integration with every other coding tool has not been tested.
 
-Your agent reads the playbook, scans your project for stack signals like `package.json`, `pyproject.toml`, `Dockerfile`, or `*.tf`, and loads only the rules that match. It then checks what config you already have, diffs it against the rules, and fills in the gaps — agent instructions, permissions, reviewer agents, slash commands. If something's already there, it leaves it alone.
+## Boundaries
+
+Personal model preferences and spending policies stay in personal configuration. AgentReady does not supply credentials, authorize charges, or enforce billing limits. A historical approval does not authorize a new session. Parallel work is optional and may consume more tokens.
+
+## Repository map
+
+- [Single skill](skills/agentready/SKILL.md): current workflow and supporting references.
+- [ENV.md](ENV.md): compatibility entry point for existing one-prompt users.
+- [Validation](tests/README.md): offline scenarios, measured outcomes, and limitations.
+- `rules/`, `global/`, and older `examples/`: legacy optional resources; not automatically installed or treated as current cross-tool configuration.
 
 ## License
 

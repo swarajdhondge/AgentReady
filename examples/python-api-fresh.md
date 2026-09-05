@@ -1,3 +1,5 @@
+> Historical example of the former setup playbook. Automatic installations, permissions, and line-count rules below are not current recommendations. Use [AgentReady](../skills/agentready/SKILL.md).
+
 # Example: AgentReady on a fresh Python API
 
 ## Project: FastAPI + PostgreSQL, brand new, no existing agent config

@@ -1,3 +1,5 @@
+> Historical example of the former setup playbook. Automatic installations, permissions, and line-count rules below are not current recommendations. Use [AgentReady](../skills/agentready/SKILL.md).
+
 # Example: AgentReady re-run on an already-configured project
 
 ## Project: Node.js API, AgentReady applied 2 weeks ago, running again to verify

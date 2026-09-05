@@ -1,14 +1,9 @@
 # AgentReady
 
-Playbook for configuring any project with AI coding agent best practices. Works with Claude Code, Codex, Gemini CLI, Cursor, Copilot, or any agent that reads instruction files.
+AgentReady provides one skill for project understanding, setup, and goal-directed development.
 
-When asked to "use AgentReady", "set up this project", "align with AgentReady", or similar -- read `ENV.md` and execute it against the current project.
+When asked to use AgentReady on a project, read [skills/agentready/SKILL.md](skills/agentready/SKILL.md). Work in the user's target project. When developing AgentReady itself, preserve its one-prompt interface and test meaningful behavior with isolated offline scenarios described in [tests/README.md](tests/README.md).
 
-**Preservation-first**: Every project may already have working agent instructions, settings, memory, context, and conventions. That existing state is MORE important than anything here. AgentReady fills gaps and restructures bloat -- it never overwrites, removes, or contradicts what's already established.
+Keep the skill self-contained. Preserve existing project knowledge and user authorization; expose contradictions rather than silently overwrite decisions. Do not infer that legacy agents, hooks, or MCP servers are installed. Legacy resources are optional and are not the active workflow.
 
-## Quick Start
-
-1. Read `ENV.md` -- it's the complete step-by-step playbook
-2. It tells you to: scan the project → load matching rules from `rules/` → generate/update config
-3. Rules are composable: a Python + Docker + CI project loads `rules/python.md` + `rules/docker.md` + `rules/cicd.md`
-4. Every project also gets `rules/workflow.md` (autonomous patterns) and `rules/context.md` (session management)
+Validate changed Markdown links and skill frontmatter, and run the relevant behavioral scenarios for workflow changes. Do not require API keys, paid calls, or new dependencies for local fixture checks.

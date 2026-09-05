@@ -1,3 +1,5 @@
+> Historical example of the former setup playbook. Automatic installations, permissions, and line-count rules below are not current recommendations. Use [AgentReady](../skills/agentready/SKILL.md).
+
 # Example: AgentReady on a .NET desktop app
 
 ## Project: WPF app with SQLite, no web, no Docker

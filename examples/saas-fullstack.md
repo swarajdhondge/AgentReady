@@ -1,3 +1,5 @@
+> Historical example of the former setup playbook. Automatic installations, permissions, and line-count rules below are not current recommendations. Use [AgentReady](../skills/agentready/SKILL.md).
+
 # Example: AgentReady on a fullstack SaaS project
 
 ## Project: FastAPI + Next.js + PostgreSQL + Redis + Docker + GitHub Actions
