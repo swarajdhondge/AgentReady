@@ -1,5 +1,6 @@
 #!/bin/bash
-# PreToolUse hook: blocks destructive bash commands
+# Legacy PreToolUse hook: rejects commands matching the patterns below
+# This pattern list is not a complete shell security boundary.
 # Exit code 2 = block the tool call, stderr fed back to Claude
 
 INPUT=$(cat)

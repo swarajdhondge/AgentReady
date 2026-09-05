@@ -1,43 +1,12 @@
-# ML / AI Agent Rules
+# ML and AI
 
-## Signals
-`torch` or `tensorflow` in deps, `transformers`, `llamaindex`, `langchain`, `chromadb`,
-`google-adk`, `litellm`, `instructor`, `openai`, `anthropic` in deps,
-`train.py`, `inference.py`, `models/` with model definitions, `notebooks/` directory
+Optional inspection notes for [AgentReady](../skills/agentready/SKILL.md). Use the project's actual configuration; this file does not grant permissions or prescribe a stack.
 
-## CLAUDE.md sections to include
+Start with Model/provider dependencies, training code, notebooks, and evaluation records.
 
-### Conventions
-- Reproducibility: seed everything (random, numpy, torch), log all hyperparameters
-- Config-driven experiments (YAML/JSON files), not hardcoded values
-- Structured logging for metrics, not print statements
-- pathlib for file paths
-- Type hints on all functions
-- Separate data loading, model definition, training loop, evaluation
-
-### Conventions (LLM/Agent projects)
-- Use environment variables for API keys, never hardcode
-- Structured output with Pydantic models (if using instructor/litellm)
-- Retry logic with exponential backoff for API calls
-- Token counting and cost tracking
-- Cache LLM responses during development to save costs
-
-### Conventions (RAG)
-- Chunk size and overlap as configurable parameters
-- Embedding model versioned and documented
-- Vector DB indexes documented with dimensionality
-- Evaluation: precision, recall, and relevance scoring
-
-### Prohibitions
-- NEVER commit model weights or large datasets to git (use .gitignore)
-- NEVER hardcode API keys for LLM/cloud providers
-- NEVER train without setting random seeds
-- NEVER skip evaluation before deploying a model change
-
-## Permissions
-```
-Bash(pytest:*), Bash(ruff:*), Bash(python:*), Bash(pip:*)
-```
-
-## If Anthropic SDK detected
-Suggest using built-in `/claude-api` skill for building and debugging.
+- Identify model versions, data sources, evaluation criteria, and experiment configuration.
+- Preserve seeds and other reproducibility settings where relevant; record known nondeterminism.
+- Read the rationale behind prompts, retrieval, caching, and retry behavior before changing them.
+- Separate measured usage and cost from estimates. Missing usage data is not zero cost.
+- Inspect scripts for provider calls and credential access. Follow the user's current approval and budget scope; use offline fixtures when live calls are not authorized.
+- Check data/model storage and privacy requirements before committing artifacts.

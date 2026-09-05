@@ -1,31 +1,11 @@
-# React / Next.js Rules
+# React and Next.js
 
-## Signals
-`next.config.*`, `react` in package.json deps, `app/` or `pages/` directory with layout/page files
+Optional inspection notes for [AgentReady](../skills/agentready/SKILL.md). Use the project's actual configuration; this file does not grant permissions or prescribe a stack.
 
-## CLAUDE.md sections to include
+Start with Dependencies, routing directories, framework configuration, and component tests.
 
-### Conventions (React)
-- Functional components only, no class components
-- Custom hooks for reusable logic (prefix with `use`)
-- Props interfaces defined inline or co-located
-- State management: Zustand or React Context (check what's in deps)
-- Memoize expensive computations, not every component
-
-### Conventions (Next.js)
-- App Router: server components by default, `'use client'` only when needed
-- Server components for data fetching, client components for interactivity
-- Use `next/image` for images, `next/link` for navigation
-- Server actions for mutations (prefer over API routes)
-- Metadata API for SEO
-
-### Prohibitions
-- NEVER fetch data in client components when server components can do it
-- NEVER use `useEffect` for data fetching in Next.js -- use server components or SWR/React Query
-- Always run `npm run build` before pushing -- catches SSR errors that dev mode misses
-
-## Testing
-- Vitest or Jest for unit tests
-- Playwright for E2E
-- React Testing Library for component tests
-- Always test mobile viewport before marking frontend work complete
+- Identify the installed framework version and routing model before suggesting changes.
+- Read how the project handles data fetching, state, mutations, and server/client boundaries.
+- Preserve established patterns unless the task calls for changing them. A framework dependency alone does not justify choosing a new state library or router.
+- Verify affected interactions and layouts with the project's existing checks. Use a browser when visual or interactive behavior matters.
+- Consult the installed version's documentation for unfamiliar APIs.

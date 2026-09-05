@@ -1,46 +1,11 @@
-# Docker / Container Rules
+# Containers
 
-## Signals
-`Dockerfile`, `docker-compose.yml`, `docker-compose.yaml`, `.dockerignore`
+Optional inspection notes for [AgentReady](../skills/agentready/SKILL.md). Use the project's actual configuration; this file does not grant permissions or prescribe a stack.
 
-## CLAUDE.md sections to include
+Start with Dockerfiles, Compose files, and `.dockerignore`.
 
-### Commands
-```bash
-docker compose build
-docker compose up -d
-docker compose ps
-docker compose logs -f <service>
-docker compose down
-```
-
-### Conventions
-- Multi-stage builds: separate build and runtime stages
-- Non-root user in production containers
-- Minimal base images (alpine, distroless, slim)
-- .dockerignore mirrors .gitignore + node_modules, .git, __pycache__
-- Pin image versions (no `latest` tag in production)
-- One process per container
-
-### Security
-- Read-only root filesystem where possible (`read_only: true`)
-- Drop all capabilities, add back only what's needed (`cap_drop: [ALL]`)
-- No new privileges (`security_opt: [no-new-privileges:true]`)
-- Resource limits on all services (memory, CPU)
-- Seccomp profiles for production containers
-- Never run as root in production
-
-### Prohibitions
-- NEVER hardcode secrets in Dockerfile or compose -- use env_file or secrets
-- NEVER expose unnecessary ports
-- NEVER use `docker compose down -v` without confirmation (destroys volumes)
-
-## Permissions
-```
-Bash(docker compose ps:*), Bash(docker compose logs:*), Bash(docker compose build:*), Bash(docker compose up:*), Bash(docker compose down)
-```
-
-## Deny
-```
-Bash(docker compose down -v:*)
-```
+- Identify build targets, runtime users, mounted volumes, exposed ports, and service dependencies.
+- Use the project's documented Compose commands and inspect which resources they affect.
+- Record image versions and required runtime privileges; investigate unnecessary access when relevant to the task.
+- Keep secrets out of image layers and committed configuration.
+- Removing volumes can delete data. Follow the user's authorization before destructive operations.

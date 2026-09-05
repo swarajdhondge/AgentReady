@@ -21,6 +21,6 @@ if [ -f "plan.md" ]; then
 fi
 
 # Remind about context management
-echo "## Context reminder: You just went through compaction. Use /compact <focus> proactively before hitting 40% context. Use subagents for exploration to keep main context clean."
+echo "## Resume: Read the project knowledge map, relevant discovery and decisions, and current progress before continuing. Confirm the recorded state against the code."
 
 exit 0

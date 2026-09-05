@@ -1,9 +1,9 @@
 #!/bin/bash
-# Stop hook: prevents Claude from declaring "done" without running verification
+# Legacy stop hook: looks for test-related text in the supplied transcript
 # Exit code 2 = block stop, feed stderr back to Claude so it runs tests
 #
-# This hook checks if the project has a test/build/lint command and whether
-# Claude ran it in this session. If tests exist but weren't run, it blocks.
+# This is a text heuristic; it does not prove that tests ran or passed.
+# Inspect host compatibility before enabling this optional hook.
 
 INPUT=$(cat)
 if ! command -v jq &>/dev/null; then

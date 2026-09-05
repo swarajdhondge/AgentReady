@@ -1,61 +1,11 @@
-> Historical example of the former setup playbook. Automatic installations, permissions, and line-count rules below are not current recommendations. Use [AgentReady](../skills/agentready/SKILL.md).
+# A project with several services
 
-# Example: AgentReady on a fullstack SaaS project
+Illustrative scenario, not a recorded test. See [validation results](../tests/README.md) for executed trials.
 
-## Project: FastAPI + Next.js + PostgreSQL + Redis + Docker + GitHub Actions
+> Use AgentReady to help deliver the approved account-export feature.
 
-### Step 1: Read existing state
-- CLAUDE.md exists (180 lines) -- has architecture, conventions, phase tracking
-- .claude/settings.json exists -- has some permissions
-- No .mcp.json, no agents, no /ready command
+Read the documentation index, discovery, accepted decisions, and delivery plan. Trace the feature through the affected frontend, API, storage, and background jobs.
 
-### Step 2: Detect
-Python (FastAPI, SQLAlchemy, Pydantic, Alembic, Redis), TypeScript (Next.js, React, Tailwind, Zustand), Docker (compose with postgres + redis services), GitHub Actions (test + deploy workflows)
+Keep accepted privacy and product constraints attached to the implementation plan. Divide work only where ownership and dependencies are clear. Verify the integrated behavior and record new findings.
 
-### Step 3: Rules loaded
-python.md, typescript.md, react-nextjs.md, docker.md, cicd.md, workflow.md, context.md
-
-### Step 4: Diff
-- CLAUDE.md is 180 lines -- needs restructuring (over 100 line limit)
-- Missing: code-reviewer agent, security-reviewer agent, /ready command
-- Missing: webapp-testing skill (install individually with `--skill` flag)
-- Existing permissions cover most things, missing alembic + docker compose
-- Architecture section (60 lines) should move to docs/architecture.md
-- Deployment section (40 lines) should move to docs/deployment.md
-
-### Step 5: Restructure CLAUDE.md (180 → 80 lines + 2 imported files)
-
-Created `docs/architecture.md` (60 lines moved from CLAUDE.md)
-Created `docs/deployment.md` (40 lines moved from CLAUDE.md)
-CLAUDE.md rewritten as 80-line core with @imports. All 180 original lines preserved across 3 files.
-Added Workflow section (agents fire automatically -- code-reviewer after changes, test-writer for new code, verify before done).
-
-### Step 6-7: .mcp.json + settings.json
-No .mcp.json needed (global servers cover it)
-Merged alembic + docker compose permissions into existing settings.json
-
-### Step 8-10: Skills, agents, commands
-Installed skills: grill-me, grill-with-docs, webapp-testing, frontend-design (all via `--skill` flag)
-Copied: code-reviewer.md, security-reviewer.md, test-writer.md
-Copied: /ready command
-
-### Report
-```
-## AgentReady Applied
-
-### Detected: Python (FastAPI), TypeScript (Next.js), Docker, GitHub Actions
-### Rules loaded: python, typescript, react-nextjs, docker, cicd, workflow, context
-
-### Created: docs/architecture.md, docs/deployment.md, .claude/agents/code-reviewer.md,
-  .claude/agents/security-reviewer.md, .claude/agents/test-writer.md, .claude/commands/ready.md
-
-### Restructured: CLAUDE.md 180 lines → 80 lines + 2 @imported files (zero info loss)
-
-### Updated: .claude/settings.json (added alembic + docker compose permissions)
-
-### Skills installed: grill-me, grill-with-docs, webapp-testing, frontend-design
-
-### Already in place: CLAUDE.md conventions, tech stack docs, test commands, git workflow
-
-### Needs user action: Sentry MCP (`claude mcp add --transport http sentry https://mcp.sentry.dev/mcp`)
-```
+A long instruction file alone is not a reason to relocate documentation. Missing agents or servers alone are not reasons to install them.

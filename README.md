@@ -12,10 +12,10 @@ Your agent reads [SKILL.md](skills/agentready/SKILL.md), follows its relevant re
 
 - Discover existing code, research, experiments, decisions, plans, and progress.
 - Read the sources relevant to your goal, including the evidence behind the plan.
-- Ask about consequential gaps; distinguish your decisions from agent assumptions.
+- Ask about missing decisions; distinguish your decisions from agent assumptions.
 - Work within your authorization, verify the outcome, and preserve discoveries for the next session.
 
-Existing knowledge stays in its existing locations. If no suitable record exists, the agent can create one small `AGENTREADY.md`. There is no mandatory documentation tree, agent swarm, or fixed planning ceremony.
+Existing knowledge stays in its existing locations. If no suitable record exists, the agent can create one small `AGENTREADY.md`. Use the project’s existing structure.
 
 ## Install as a skill (optional)
 
@@ -32,7 +32,9 @@ Personal model preferences and spending policies stay in personal configuration.
 - [Single skill](skills/agentready/SKILL.md): current workflow and supporting references.
 - [ENV.md](ENV.md): compatibility entry point for existing one-prompt users.
 - [Validation](tests/README.md): offline scenarios, measured outcomes, and limitations.
-- `rules/`, `global/`, and older `examples/`: legacy optional resources; not automatically installed or treated as current cross-tool configuration.
+- `examples/`: short usage scenarios, separate from executed tests.
+- `rules/`: optional notes on what to inspect for each stack.
+- `global/`: legacy Claude agent and hook templates; not installed automatically.
 
 ## License
 

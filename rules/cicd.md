@@ -1,29 +1,11 @@
-# CI/CD Rules
+# CI and deployment
 
-## Signals
-`.github/workflows/*.yml`, `Jenkinsfile`, `.gitlab-ci.yml`, `cloudbuild.yaml`, `Makefile` with deploy targets
+Optional inspection notes for [AgentReady](../skills/agentready/SKILL.md). Use the project's actual configuration; this file does not grant permissions or prescribe a stack.
 
-## CLAUDE.md sections to include
+Start with Workflow files, deployment scripts, and release documentation.
 
-### Conventions (GitHub Actions)
-- Pin action versions to full SHA, not tags (supply chain security)
-- Use `GITHUB_TOKEN` built-in, not PATs, where possible
-- Cache dependencies (actions/cache) to speed up builds
-- Separate jobs for lint, test, build, deploy -- fail fast
-- Branch protection: require PR reviews + passing checks before merge
-
-### Conventions (General)
-- Build once, deploy many: same artifact across environments
-- Secrets via CI platform's secret store, never in code
-- Idempotent deployments: running deploy twice should be safe
-- Rollback plan documented for every deploy pipeline
-
-### Prohibitions
-- NEVER store secrets in workflow files
-- NEVER use `actions/checkout` without specifying the ref (for PRs)
-- NEVER auto-merge without tests passing
-
-## Permissions
-```
-Bash(gh run list:*), Bash(gh run view:*), Bash(gh pr:*)
-```
+- Identify triggers, required checks, artifacts, environments, and deployment gates.
+- Read which credentials and permissions each job uses without exposing secret values.
+- Preserve the project's release and rollback procedure. Do not infer deployment or merge approval from permission to edit a workflow.
+- Inspect commands before running them locally; CI scripts may publish artifacts or provision resources.
+- Verify affected jobs with available checks and report any execution that remains untested.
